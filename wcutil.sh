@@ -12,22 +12,22 @@
 #     -help,    -h
 #
 
-function get_version() {
-    echo "Current WeChat Version is: "
-    ls $HOME/Library/Containers/com.tencent.xinWeChat/Data/Library/Application\ Support/com.tencent.xinWeChat | head -n 1
-}
-
-function get_cipher() {
-    wc_version=`get_version`
-
-    echo "Your WeChat Cipher is: "
-    ls $HOME/Library/Containers/com.tencent.xinWeChat/Data/Library/Application\ Support/com.tencent.xinWeChat/$wc_version | head -n 1
-}
 
 function enter_tar() {
-    cipher=`get_cipher`
+    # TODO: Cannot get this id by common method
+    id="ac8875c5f2cfa9594028fc2ebc2cc351"
+    wc_version=`ls $HOME/Library/Containers/com.tencent.xinWeChat/Data/Library/Application\ Support/com.tencent.xinWeChat | head -n 1`
+    cd $HOME/Library/Containers/com.tencent.xinWeChat/Data/Library/Application\ Support/com.tencent.xinWeChat/"$wc_version"/"$id"
+}
 
-    cd $HOME/Library/Containers/com.tencent.xinWeChat/Data/Library/Application\ Support/com.tencent.xinWeChat/$wc_version/$cipher
+function remove_all() {
+    rm -rf $HOME/Library/Containers/com.tencent.xinWeChat
+    echo "com.tencent.xinWeChat removed!"
+}
+
+function backup_all() {
+    cp -r $HOME/Library/Containers/com.tencent.xinWeChat ~/com.tencent.xinWeChat.bak
+    echo "com.tencent.xinWeChat backuped to ~!"
 }
 
 # remove unuseful cached jpgs
@@ -65,6 +65,7 @@ function gentle_backup() {
     #   cd Message/MessageTemp/unknown{$i}
     #   do_something()
 
+    # for now, you need change this by your own
     unknown="1e3f003c149f7b7921396eda773ec286"
     cd Message/MessageTemp/$unknown/Audio
 
@@ -74,10 +75,8 @@ function gentle_backup() {
 }
 
 function main() {
-    get_version
-    get_cipher
-
-    rm_unuseful_file
+    enter_tar
+    #rm_unuseful_file
 
     #enforce_backup
     #gentle_backup

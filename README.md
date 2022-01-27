@@ -11,6 +11,12 @@
 - backup WeChat data with enforce_backup or gentle_backup
 - remove unuseful cached data from WeChat
 
+## Usage
+
+`$ ./wcutil.sh`
+
+ps: In function gentle_backup(), you need change variable unknown with your own one.
+
 ## Get Your WeChat Version/Cipher
 
 > Not implement yet, but you can use function get_version()/get_cipher() to get the WeChat version/cipher.
@@ -22,6 +28,7 @@
 
 ## TODO
 
+- refactor
 - interactive support
 - command line support
 - action to specific data instead of all data
