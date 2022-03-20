@@ -14,7 +14,7 @@
 
 
 function enter_tar() {
-    # TODO: Cannot get this id by common method
+    # TODO: cannot get this id by common method
     id="ac8875c5f2cfa9594028fc2ebc2cc351"
     wc_version=`ls $HOME/Library/Containers/com.tencent.xinWeChat/Data/Library/Application\ Support/com.tencent.xinWeChat | head -n 1`
     cd $HOME/Library/Containers/com.tencent.xinWeChat/Data/Library/Application\ Support/com.tencent.xinWeChat/"$wc_version"/"$id"
@@ -60,22 +60,19 @@ function gentle_backup() {
     enter_tar
 
     # TODO: decode the cipher lists
-    #unknown={"", ""}
-    #for (( i = 1; i < len(unknown); i++ ))
-    #   cd Message/MessageTemp/unknown{$i}
-    #   do_something()
 
     # for now, you need change this by your own
     unknown="1e3f003c149f7b7921396eda773ec286"
     cd Message/MessageTemp/$unknown/Audio
 
-    mkdir -p ~/wc_backup/{audio, video, db}
-
+    mkdir -p ~/wc_backup/audio
     cp *.aud.silk ~/wc_backup/audio
+    echo "Audio/*.aud.silk backuped!"
 }
 
 function main() {
     enter_tar
+    remove_all
     #rm_unuseful_file
 
     #enforce_backup
